@@ -1,0 +1,39 @@
+{{>header}}
+{{>navbar}}
+
+    <div class="container mt-5">
+      <h2 class="text-center">Create a new diet</h2>
+      <form id="dietForm" name="editForm"  onsubmit="return validateNutritionForm()" action="/nutritions/newNutrition" method="post">
+        <input type="hidden" name="_csrf" value="{{token}}"/>
+        
+        <div class="mb-3">
+          <label for="dietName" class="form-label">Diet name:</label>
+          <input type="text" class="form-control" id="dietName" name="name" placeholder="Write the name of the diet"  />
+        </div>
+
+        <div class="mb-3">
+          <label for="dietNCalories" class="form-label">Diet Number of calories:</label>
+          <input class="form-control" type="number"id="dietNCalories" name="calories" />
+        </div>
+        <div class="mb-3">
+          <label for="goal" class="form-label">Diet Goal:</label>
+          <select class="form-select" id="goal" name="goal" required>
+            <option value="Maintain weight">Maintain weight</option>
+            <option value="Increase weight">Increase Weight</option>
+            <option value="Lose weight">Lose Weight</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="meals" class="form-label">Meals of the day (list them here):</label>
+          <textarea name="description" class="form-control" id="meals" rows="4" placeholder="E.g., eggs, meat, fish..."></textarea>
+        </div>
+
+        <div class="d-flex justify-content-center gap-3">
+          <button type="submit" class="btn-load">Save Diet</button>
+          <a href="/nutritions" class="btn-load">Return</a>
+        </div>
+      </form>
+    </div>
+
+     
+{{>footer}}

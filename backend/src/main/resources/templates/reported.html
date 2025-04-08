@@ -1,0 +1,57 @@
+{{>header}}
+{{>navbar}}
+  <section>
+      <div class="container-account2">
+        <div class="form-container-plans2">
+          <h1 class="title">Training Comments Reported</h1>
+
+          <ul>
+          {{#trainings}}            
+                <div class="card shadow-sm">
+                  <div class="card-body">
+                    <div id="training/nutrition-picture-container">
+                      <img src="/training/image/{{id}}" alt="training" class="training" id="trainingImage">
+                    </div>
+                    <h5 class="card-title">{{name}}</h5>
+                    <h5 class="card-title">{{goal}}</h5>
+                    <h5 class="card-title">{{description}}</h5>
+                    <h5 class="card-title">{{duration}}</h5>
+                    <h5 class="card-title">{{intensity}}</h5>
+                    <a href="#" class="btn-load-2">Delete</a>
+                  </div>
+                </div>
+          {{/trainings}}
+          </ul>
+
+          {{^trainings}}
+          <p>No hay planes de entrenamiento añadidos al perfil</p>
+          {{/trainings}}
+        </div>
+
+        <div class="form-container-plans2">
+          <h1 class="title">Nutrition Comments Reported</h1>
+
+          <ul>
+          {{#nutritions}}
+              <div class="card shadow-sm">
+                <div class="card-body">
+                    <div id="training/nutrition-picture-container">
+                      <img src="/nutrition/image/{{id}}" alt="nutrition" class="nutrition-image" id="nutritionImage">
+                    </div>
+                  <h5 class="card-title">{{title}}</h5>
+                  <h5 class="card-title">{{name}}</h5>
+                  <h5 class="card-title">{{description}}</h5>
+                  <a href="#" class="btn-load-2">Delete</a>
+                </div>
+              </div>
+          {{/nutritions}}
+          </ul>
+          
+          {{^nutritions}}
+          <p>No hay planes de nutrición añadidos al perfil</p>
+          {{/nutritions}}
+        </div>
+      </div>
+  </section>
+
+{{> footer}}

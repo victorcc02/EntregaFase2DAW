@@ -1,0 +1,19 @@
+{{>header}}
+{{>navbar}}
+
+    <!-- Register -->
+    <div class="container-account">
+      <img src="/images/gym7.jpg" class="fondo-login" />
+      <div class="form-container">
+        <p class="title">Welcome to AlphaGym</p>
+        <form class="form" action="/register" method="post">
+          <input type="text" class="input" name="name" placeholder="Name" required>
+          <input type="email" class="input" name="email" placeholder="Email" required>
+          <input type="password" class="input" name="password" placeholder="Password" required>
+          <input type="hidden" name="_csrf" value="{{token}}"/>
+          <input type="submit" class="btn-load" value="Register"/>
+        </form>
+      </div>
+    </div>
+
+{{>footer}}

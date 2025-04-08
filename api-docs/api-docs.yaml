@@ -1,0 +1,1673 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: https://localhost:8443
+  description: Generated server url
+paths:
+  /api/users/{id}:
+    get:
+      tags:
+      - user-rest-controller
+      summary: Get a user by its id
+      operationId: getUser
+      parameters:
+      - name: id
+        in: path
+        description: User id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: User not found
+          content: {}
+        "200":
+          description: Found the user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid id supplied
+        "401":
+          description: User not authorized
+    put:
+      tags:
+      - user-rest-controller
+      summary: Update a user by its id
+      operationId: replaceUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: User updated correctly
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: User not updated
+        "403":
+          description: User not authorized
+  /api/users/{id}/image:
+    get:
+      tags:
+      - user-rest-controller
+      summary: Gets the image of a user by its id
+      operationId: getUserImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: "User not found, user image not found or doesn't have permission\
+            \ to access it"
+          content: {}
+        "200":
+          description: Found the user image
+        "400":
+          description: Invalid id supplied
+        "401":
+          description: User not authorized
+    put:
+      tags:
+      - user-rest-controller
+      summary: Updates the image of a user
+      operationId: replaceUserImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  format: binary
+              required:
+              - imageFile
+      responses:
+        "404":
+          description: User not found
+          content: {}
+        "201":
+          description: Image created correctly
+        "204":
+          description: Image updated correctly
+        "400":
+          description: Bad request
+        "401":
+          description: User not authorized
+        "403":
+          description: User not authorized
+    post:
+      tags:
+      - user-rest-controller
+      summary: Registers the image of a user
+      operationId: createUserImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  format: binary
+              required:
+              - imageFile
+      responses:
+        "404":
+          description: User not found
+          content: {}
+        "201":
+          description: Image created correctly
+        "400":
+          description: Bad request
+        "401":
+          description: User not authorized
+        "403":
+          description: User not authorized
+  /api/trainings/{trainingId}:
+    get:
+      tags:
+      - training-rest-controller
+      summary: Get a training by ID
+      operationId: getTrainingByIdd
+      parameters:
+      - name: trainingId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Training not found
+          content: {}
+        "200":
+          description: Training found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UniqueTrainingDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "500":
+          description: Internal server error
+    put:
+      tags:
+      - training-rest-controller
+      summary: Replace a training
+      operationId: replacePost
+      parameters:
+      - name: trainingId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TrainingDTO"
+        required: true
+      responses:
+        "404":
+          description: Training not found
+          content: {}
+        "200":
+          description: Training replaced
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrainingDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "500":
+          description: Internal server error
+    delete:
+      tags:
+      - training-rest-controller
+      summary: Delete a training
+      operationId: deleteTraining
+      parameters:
+      - name: trainingId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Training not found
+          content: {}
+        "200":
+          description: Training deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrainingDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "500":
+          description: Internal server error
+  /api/trainings/{trainingId}/image:
+    get:
+      tags:
+      - training-rest-controller
+      summary: Retrieve training image
+      operationId: getTrainingImage
+      parameters:
+      - name: trainingId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Training image not found
+          content: {}
+        "200":
+          description: Training image found
+        "500":
+          description: Internal server error
+    put:
+      tags:
+      - training-rest-controller
+      summary: Replace training image
+      operationId: replaceTrainingImage
+      parameters:
+      - name: trainingId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  format: binary
+              required:
+              - imageFile
+      responses:
+        "404":
+          description: Not Found
+        "204":
+          description: Training image replaced
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "500":
+          description: Internal server error
+    post:
+      tags:
+      - training-rest-controller
+      summary: Create training image
+      operationId: createTrainingImage
+      parameters:
+      - name: trainingId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  format: binary
+              required:
+              - imageFile
+      responses:
+        "404":
+          description: Not Found
+        "201":
+          description: Training image created
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "500":
+          description: Internal server error
+    delete:
+      tags:
+      - training-rest-controller
+      summary: Delete training image
+      operationId: deletePostImage
+      parameters:
+      - name: trainingId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Training image not found
+          content: {}
+        "204":
+          description: Training image deleted
+        "500":
+          description: Internal server error
+  /api/trainingComments/valid:
+    put:
+      tags:
+      - training-comment-restcontroller
+      summary: Unreport training comment
+      description: Unreport training comment
+      operationId: unreportComment
+      parameters:
+      - name: commentId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Training comment not unreported
+        "200":
+          description: Training comment unreported
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingCommentDTO"
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingCommentDTO"
+        "403":
+          description: Forbidden-Access denied
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingCommentDTO"
+  /api/trainingComments/report:
+    put:
+      tags:
+      - training-comment-restcontroller
+      summary: Report training comment
+      description: Report training comment
+      operationId: reportComment
+      parameters:
+      - name: commentId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Training comment not reported
+        "200":
+          description: Training comment reported
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingCommentDTO"
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingCommentDTO"
+        "403":
+          description: Forbidden-Access denied
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingCommentDTO"
+  /api/trainingComments/:
+    get:
+      tags:
+      - training-comment-restcontroller
+      summary: Get paginated training comments
+      description: Get paginated training comments
+      operationId: getPaginatedTrainingComments
+      parameters:
+      - name: trainingId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        "404":
+          description: Training comments not found
+        "200":
+          description: Training comments found
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TrainingCommentDTO"
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TrainingCommentDTO"
+    put:
+      tags:
+      - training-comment-restcontroller
+      summary: Update a training comment
+      description: Update a training comment
+      operationId: updateTrainingComment
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TrainingCommentDTO"
+        required: true
+      responses:
+        "404":
+          description: Training comment not updated
+        "200":
+          description: Training comment updated
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingCommentDTO"
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingCommentDTO"
+        "403":
+          description: Forbidden-Access denied
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingCommentDTO"
+    post:
+      tags:
+      - training-comment-restcontroller
+      summary: Create a new training comment
+      description: Create a new training comment
+      operationId: createTrainingComment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TrainingCommentDTO"
+        required: true
+      responses:
+        "404":
+          description: Training comment not created
+        "201":
+          description: Training comment created
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingCommentDTO"
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingCommentDTO"
+        "403":
+          description: Forbidden-Access denied
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingCommentDTO"
+    delete:
+      tags:
+      - training-comment-restcontroller
+      summary: Delete a training comment
+      description: Delete a training comment
+      operationId: deleteTrainingComment
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Training comment not deleted
+        "200":
+          description: Training comment deleted
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingCommentDTO"
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingCommentDTO"
+        "403":
+          description: Forbidden-Access denied
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingCommentDTO"
+  /api/nutritions/{id}:
+    get:
+      tags:
+      - nutrition-rest-controller
+      summary: Get a nutrition by ID
+      operationId: getNutrition
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Nutrition not found
+          content: {}
+        "200":
+          description: Nutrition found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NutritionDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "500":
+          description: Internal server error
+    put:
+      tags:
+      - nutrition-rest-controller
+      summary: Edit a nutrition by ID
+      operationId: editDiet
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NutritionDTO"
+        required: true
+      responses:
+        "404":
+          description: Nutrition not found
+          content: {}
+        "200":
+          description: Nutrition updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NutritionDTO"
+        "400":
+          description: Bad request - Invalid input data
+        "401":
+          description: Unauthorized access
+        "403":
+          description: Forbidden - You don't have permission to edit
+        "500":
+          description: Internal server error
+    delete:
+      tags:
+      - nutrition-rest-controller
+      summary: Delete a nutrition by ID
+      operationId: deleteNutrition
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Nutrition not found
+          content: {}
+        "200":
+          description: Nutrition deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NutritionDTO"
+        "401":
+          description: Unauthorized access
+        "403":
+          description: Forbidden - You don't have permission to delete
+        "500":
+          description: Internal server error
+  /api/nutritions/{id}/image:
+    get:
+      tags:
+      - nutrition-rest-controller
+      summary: Retrieve the image of a nutrition
+      operationId: getNutritionImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Nutrition or image not found
+          content: {}
+        "200":
+          description: Image retrieved successfully
+        "500":
+          description: Internal server error
+    put:
+      tags:
+      - nutrition-rest-controller
+      summary: Replace the image of a nutrition
+      operationId: replaceNutritionImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imgNutrition:
+                  type: string
+                  format: binary
+              required:
+              - imgNutrition
+      responses:
+        "404":
+          description: Nutrition not found
+          content: {}
+        "204":
+          description: Image replaced successfully
+        "400":
+          description: Bad request - Invalid file format
+        "500":
+          description: Internal server error
+    post:
+      tags:
+      - nutrition-rest-controller
+      summary: Upload an image for a nutrition
+      operationId: createNutritionImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imgNutrition:
+                  type: string
+                  format: binary
+              required:
+              - imgNutrition
+      responses:
+        "404":
+          description: Nutrition not found
+          content: {}
+        "201":
+          description: Image uploaded successfully
+        "400":
+          description: Bad request - Invalid file format
+        "500":
+          description: Internal server error
+    delete:
+      tags:
+      - nutrition-rest-controller
+      summary: Delete the image of a nutrition
+      operationId: deleteNutritionImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Nutrition not found
+          content: {}
+        "204":
+          description: Image deleted successfully
+        "500":
+          description: Internal server error
+  /api/nutritionComments/{id}:
+    put:
+      tags:
+      - nutrition-comment-rest-controller
+      summary: Update nutrition comment
+      description: Update nutrition comment
+      operationId: updateNutritionComment
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NutritionCommentDTO"
+        required: true
+      responses:
+        "404":
+          description: Nutrition comment not found
+        "200":
+          description: Nutrition comment updated
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionCommentDTO"
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionCommentDTO"
+        "403":
+          description: Forbidden-Access denied
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionCommentDTO"
+  /api/nutritionComments/valid:
+    put:
+      tags:
+      - nutrition-comment-rest-controller
+      summary: Unreport nutrition comment
+      description: Unreport nutrition comment
+      operationId: unreportComment_1
+      parameters:
+      - name: commentId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Nutrition comment not found
+        "200":
+          description: Nutrition comment unreported
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionCommentDTO"
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionCommentDTO"
+        "403":
+          description: Forbidden-Access denied
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionCommentDTO"
+  /api/nutritionComments/report:
+    put:
+      tags:
+      - nutrition-comment-rest-controller
+      summary: Report nutrition comment
+      description: Report nutrition comment
+      operationId: reportComment_1
+      parameters:
+      - name: commentId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Nutrition comment not found
+        "200":
+          description: Nutrition comment reported
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionCommentDTO"
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionCommentDTO"
+        "403":
+          description: Forbidden-Access denied
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionCommentDTO"
+  /api/users/:
+    post:
+      tags:
+      - user-rest-controller
+      summary: Registers a new user
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "201":
+          description: User registered correctly
+        "400":
+          description: "Bad request, maybe one of the user attributes is missing or\
+            \ the type is not valid"
+        "409":
+          description: User already exists
+  /api/trainings/:
+    get:
+      tags:
+      - training-rest-controller
+      summary: Get all trainings
+      operationId: getTrainings
+      responses:
+        "404":
+          description: Trainings not found
+          content: {}
+        "200":
+          description: Found all trainings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrainingDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "500":
+          description: Internal server error
+    post:
+      tags:
+      - training-rest-controller
+      summary: Create a training
+      operationId: createTraining
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TrainingDTO"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "201":
+          description: Training created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrainingDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "500":
+          description: Internal server error
+  /api/nutritions/:
+    get:
+      tags:
+      - nutrition-rest-controller
+      summary: Get all nutritions
+      operationId: getNutritions
+      responses:
+        "404":
+          description: Nutritions not found
+          content: {}
+        "200":
+          description: Found all nutritions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Nutrition"
+        "400":
+          description: Bad request - Invalid parametes
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "500":
+          description: Internal server error
+    post:
+      tags:
+      - nutrition-rest-controller
+      summary: Create a new nutrition
+      operationId: createNutrition
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NutritionDTO"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "201":
+          description: Nutrition created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NutritionDTO"
+        "400":
+          description: Bad request - Invalid input data
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "409":
+          description: Conflict - Nutrition already exists
+        "500":
+          description: Internal server error
+  /api/nutritionComments/:
+    get:
+      tags:
+      - nutrition-comment-rest-controller
+      summary: Get paginated nutrition comments
+      description: Get paginated nutrition comments
+      operationId: getPaginatedNutritionComments
+      parameters:
+      - name: nutritionId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        "404":
+          description: Nutrition comments not found
+        "200":
+          description: Nutrition comments found
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NutritionCommentDTO"
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NutritionCommentDTO"
+    post:
+      tags:
+      - nutrition-comment-rest-controller
+      summary: Create nutrition comment
+      description: Create nutrition comment
+      operationId: createNutritionComment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NutritionCommentDTO"
+        required: true
+      responses:
+        "404":
+          description: Nutrition comment not found
+        "201":
+          description: Nutrition comment created
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionCommentDTO"
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionCommentDTO"
+        "403":
+          description: Forbidden-Access denied
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionCommentDTO"
+    delete:
+      tags:
+      - nutrition-comment-rest-controller
+      summary: Delete nutrition comment
+      description: Delete nutrition comment
+      operationId: deleteNutritionComment
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Nutrition comment not found
+        "200":
+          description: Nutrition comment deleted
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionCommentDTO"
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionCommentDTO"
+        "403":
+          description: Forbidden-Access denied
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionCommentDTO"
+  /api/auth/refresh:
+    post:
+      tags:
+      - login-controller
+      operationId: refreshToken
+      parameters:
+      - name: RefreshToken
+        in: cookie
+        required: false
+        schema:
+          type: string
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/auth/logout:
+    post:
+      tags:
+      - login-controller
+      operationId: logOut
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/auth/login:
+    post:
+      tags:
+      - login-controller
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/users/reportedComments:
+    get:
+      tags:
+      - user-rest-controller
+      operationId: getReportedComments
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+  /api/users/me:
+    get:
+      tags:
+      - user-rest-controller
+      summary: Gets the logged user
+      operationId: me
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: Found the user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: User not authorized
+  /api/users/all:
+    get:
+      tags:
+      - user-rest-controller
+      summary: Get all users
+      operationId: getUsers
+      responses:
+        "404":
+          description: Users not found
+          content: {}
+        "200":
+          description: Found all users
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: User not authorized
+  /api/trainings/paginated:
+    get:
+      tags:
+      - training-rest-controller
+      summary: Get paginated trainings
+      operationId: getPaginatedTrainings
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: Trainings retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrainingDTO"
+        "400":
+          description: Bad request - Invalid pagination parameters
+        "500":
+          description: Internal server error
+  /api/trainingComments/{trainingId}/:
+    get:
+      tags:
+      - training-comment-restcontroller
+      summary: Get training comments by training id
+      description: Get training comments by training id
+      operationId: getTrainingCommentsByTrainingId
+      parameters:
+      - name: trainingId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Training comments not found
+        "200":
+          description: Training comments found
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TrainingCommentDTO"
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TrainingCommentDTO"
+  /api/trainingComments/all:
+    get:
+      tags:
+      - training-comment-restcontroller
+      summary: Get all training comments
+      description: Get all training comments
+      operationId: getAllTrainingComments
+      responses:
+        "404":
+          description: Training comments not found
+        "200":
+          description: Training comments found
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TrainingCommentDTO"
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TrainingCommentDTO"
+  /api/nutritions/paginated:
+    get:
+      tags:
+      - nutrition-rest-controller
+      summary: Get paginated nutritions
+      operationId: getPaginatedNutritions
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: Nutritions retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NutritionDTO"
+        "400":
+          description: Bad request - Invalid pagination parameters
+        "500":
+          description: Internal server error
+  /api/nutritionComments/{nutritionId}:
+    get:
+      tags:
+      - nutrition-comment-rest-controller
+      summary: Get nutrition comments by nutrition id
+      description: Get nutrition comments by nutrition id
+      operationId: getNutritionCommentById
+      parameters:
+      - name: nutritionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Nutrition comments not found
+        "200":
+          description: Nutrition comments found
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NutritionCommentDTO"
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NutritionCommentDTO"
+  /api/nutritionComments/all:
+    get:
+      tags:
+      - nutrition-comment-rest-controller
+      summary: Get all nutrition comments
+      description: Get all nutrition comments
+      operationId: getNutritionComments
+      responses:
+        "404":
+          description: Nutrition comments not found
+        "200":
+          description: Nutrition comments found
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NutritionCommentDTO"
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NutritionCommentDTO"
+components:
+  schemas:
+    UserDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        email:
+          type: string
+    Nutrition:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        image:
+          type: boolean
+        goal:
+          type: string
+        calories:
+          type: integer
+          format: int32
+        comments:
+          type: array
+          items:
+            $ref: "#/components/schemas/NutritionComment"
+        user:
+          $ref: "#/components/schemas/User"
+        nutritionComments:
+          type: array
+          items:
+            $ref: "#/components/schemas/NutritionComment"
+          writeOnly: true
+    NutritionComment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        description:
+          type: string
+        name:
+          type: string
+        isNotified:
+          type: boolean
+        nutrition:
+          $ref: "#/components/schemas/Nutrition"
+        user:
+          $ref: "#/components/schemas/User"
+    Training:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        duration:
+          type: integer
+          format: int32
+        intensity:
+          type: string
+        description:
+          type: string
+        image:
+          type: boolean
+        goal:
+          type: string
+        comments:
+          type: array
+          items:
+            $ref: "#/components/schemas/TrainingComment"
+        user:
+          $ref: "#/components/schemas/User"
+        trainingComments:
+          type: array
+          items:
+            $ref: "#/components/schemas/TrainingComment"
+          writeOnly: true
+        img:
+          type: string
+    TrainingComment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        description:
+          type: string
+        name:
+          type: string
+        isNotified:
+          type: boolean
+        training:
+          $ref: "#/components/schemas/Training"
+        user:
+          $ref: "#/components/schemas/User"
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        email:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        trainingComments:
+          type: array
+          items:
+            $ref: "#/components/schemas/TrainingComment"
+        nutritionComments:
+          type: array
+          items:
+            $ref: "#/components/schemas/NutritionComment"
+        trainings:
+          type: array
+          items:
+            $ref: "#/components/schemas/Training"
+        nutritions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Nutrition"
+    TrainingDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        goal:
+          type: string
+        intensity:
+          type: string
+    TrainingCommentDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        isNotified:
+          type: boolean
+        training:
+          $ref: "#/components/schemas/TrainingDTO"
+        user:
+          $ref: "#/components/schemas/UserDTO"
+    NutritionDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        image:
+          type: boolean
+        goal:
+          type: string
+        calories:
+          type: integer
+          format: int32
+    NutritionCommentDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        description:
+          type: string
+        name:
+          type: string
+        isNotified:
+          type: boolean
+        nutrition:
+          $ref: "#/components/schemas/NutritionDTO"
+        user:
+          $ref: "#/components/schemas/UserDTO"
+    AuthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        message:
+          type: string
+        error:
+          type: string
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    UniqueTrainingDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        goal:
+          type: string
+        intensity:
+          type: string

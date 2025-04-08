@@ -1,0 +1,59 @@
+{{>header}}
+{{>navbar}}
+
+<div class="container mt-5">
+    <h2 class="text-center">Edit the routine {{training.id}} </h2>
+    <form name="editForm" method="post" onsubmit="return validateRoutineForm()" action="/trainings/editTraining/{{training.id}}" enctype="multipart/form-data">
+        <input type="hidden" name="_csrf" value="{{token}}"/>
+        <div class="mb-3 text-center">
+            <img id="previewImage" src="{{#training.imgTraining}}/training/image/{{training.id}}{{/training.imgTraining}}{{^training.imgTraining}}/images/emptyImage.png{{/training.imgTraining}}" class="card-img-top" style="max-width: 300px; border-radius: 10px;"/>
+        </div>
+
+
+        <input type="file" name="imageFile" placeholder="Foto" accept=".jpg, .jpeg, .png" onchange="previewSelectedImage(event)">
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Routine Name </label>
+            <input id="routineName" name="name" type="text" class="form-control" value="{{training.name}}" placeholder="{{training.name}}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Routine Intensity:</label>
+            <select class="form-select" id="intensity" name="intensity" >
+                {{#intensities}}
+                    <option value="{{level}}" {{#selected}}selected{{/selected}}> {{#level}}{{.}}{{/level}}</option>
+                {{/intensities}}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Routine Duration </label>
+            <input id="routineDuration" name="duration" type="number" class="form-control" value="{{training.duration}}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Routine Goal:</label>
+            <select class="form-select" id="goal" name="goal">
+                {{#goals}}
+                    <option value="{{objective}}" {{#selected}}selected{{/selected}}>{{#objective}}{{.}}{{/objective}}</option>
+                {{/goals}}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Routine exercises:</label>
+            <textarea name="description" class="form-control" rows="4"> {{training.description}} </textarea>
+
+        </div>
+
+
+        <div class="d-flex justify-content-center gap-3">
+            <button class="btn-load" type="submit">Save</button>
+            <a href="/trainings/{{training.id}}" class="btn-load">Cancel</a>
+        </div>
+    </form>
+</div>
+
+
+
+{{>footer}}

@@ -1,0 +1,62 @@
+{{>header}}
+{{>navbar}}
+
+
+    <div class="container mt-5">
+      <h2 class="text-center">Routine Details of routine {{training.id}} </h2>
+    {{#training.imgTraining}}
+        <div class="mb-3">
+            <img src="/training/image/{{training.id}}" class="card-img-top" id="uTrainingImage"/>
+        </div>
+    {{/training.imgTraining}}
+      <div class="mb-3">
+        <label class="form-label fw-bold">Routine Name </label>
+          <p class="form-control">{{training.name}}</p>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Routine Intensity:</label>
+        <p class="form-control">{{training.intensity}}</p>
+      </div>
+      <div class="mb-3">
+            <label class="form-label fw-bold">Routine Duration:</label>
+            <p class="form-control">{{training.duration}}</p>
+      </div>
+      <div class="mb-3">
+        <label class="form-label fw-bold">Routine Goal:</label>
+        <p class="form-control">{{training.goal}}</p>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Routine exercises:</label>
+        <textarea class="form-control" rows="4" readonly>{{training.description}}</textarea>
+      </div>
+{{#logged}}
+      <div class="mb-3">
+        <a class="btn-load w-100" href="/trainingComments/{{training.id}}/newComment"> Add Comment </a>
+      </div>
+{{/logged}}
+
+      <div class="d-flex justify-content-center gap-3">
+        {{#logged}}
+            {{^admin}}
+                {{#subscribed}}
+                    <button class="btn-load goToUnsubscribeRoutine" data-training-id="{{training.id}}">Unsubscribe</button>
+                {{/subscribed}}
+                {{^subscribed}}
+                    <button class="btn-load goToSubscribeRoutine" data-training-id="{{training.id}}">Subscribe</button>
+                {{/subscribed}}
+            {{/admin}}
+        {{/logged}}
+        <a class="btn-load" href="/trainingComments/{{training.id}}">View Comments</a>
+         {{#canEdit}}
+            <button class="btn-load goToEditRoutine" data-training-id="{{training.id}}" >Edit</button>
+         {{/canEdit}}
+          {{#admin}}
+            <button class="btn-load-delete goToDeleteRoutine" data-training-id="{{training.id}}">Delete</button>
+          {{/admin}}
+        <a class="btn-load" href="/trainings">Return</a>
+      </div>
+    </div>
+
+{{>footer}}

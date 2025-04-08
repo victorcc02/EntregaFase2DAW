@@ -1,0 +1,495 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e4de1de5;
+    padding-top: 110px;
+    flex: auto;
+}
+
+h2 {
+  color: #000000;
+  font-weight: bold;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  padding: 10px;
+  margin-bottom: 0px;
+  list-style: none;
+}
+
+/* Contenedores de training */
+.card-body {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-body li {
+  list-style: none;
+  background-color: #fff;
+  color: black;
+}
+/* Contenedores de training */
+
+/* Contenedor de info */
+
+.card-location {
+  background-color: black;
+  color: white;
+  padding: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.card-info {
+  background-color: #f8f9fa;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* lista de info index */
+.list-group-item {
+  background-color: #000000;
+  color: #fff;
+  list-style: none;
+  border-bottom: 0px;
+}
+
+/* Carousel */
+.carousel-item img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+}
+
+/* Cards */
+.card {
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+  height: 100%;
+}
+
+.card img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+}
+/*Esta clase se corresponde a las imágenes de las tarjetas cuando cargas los detalles de la rutina*/
+.card-img-top{
+  width:300px;
+  height:300px;
+  margin : auto;
+  display: block;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Buttons inside Cards */
+.btn-service {
+  background-color: rgb(33, 7, 9);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-service:hover {
+  background-color: #e4de1de5;
+  color: rgb(33, 7, 9);
+}
+
+/* Testimonials */
+#testimonials {
+  background-color: #75872cd6;
+  background-color: (22, 26, 5);
+  color: white;
+  padding: 50px 0;
+}
+
+#testimonials p {
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+/* Button More Results */
+.btn-load {
+  background-color: rgb(33, 7, 9);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+}
+.btn-load-delete {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.btn-load:hover {
+  background-color: #1f48c1e5;
+  color: white;
+}
+
+.btn-load-2 {
+  background-color: rgb(33, 7, 9);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+}
+.btn-load-2-delete {
+  background-color:red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.btn-load-2:hover {
+  background-color: #dc2a2ae5;
+  color: white;
+}
+
+.btn-load-3 {
+  background-color: rgb(33, 7, 9);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.btn-load-3:hover {
+  background-color: #2ADC80E5;
+  color: white;
+}
+
+.btn-div-extra {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-div-extra a {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+}
+/* Login  */
+
+.container-account {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+.container-login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fondo-login {
+  margin-right: 100px; /* Agrega un espacio entre la imagen y el formulario */
+  margin-left: 20px;
+  width: 60%;
+  height: auto;
+}
+
+.form-container {
+  width: 80%; /* Se ajusta dinámicamente al tamaño de la pantalla */
+  max-width: 500px; /* Para que no sea demasiado grande */
+  height: auto;
+  justify-content: center;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+
+.title {
+  font-size: 25px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 15px;
+}
+
+.input {
+  border-radius: 20px;
+  border: 1px solid #c0c0c0;
+  outline: 0 !important;
+  box-sizing: border-box;
+  padding: 12px 15px;
+}
+/* Login  */
+
+/* Register  */
+.form-container-register{
+  margin-right: 20px;
+  width: 350px;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: auto;
+  margin-right: 200px; /* Agrega un espacio entre la imagen y el formulario */
+}
+
+.foto-perfil {
+  width: 100px; /* Ajusta el tamaño según prefieras */
+  height: 100px; /* Debe ser igual al width para mantener la forma circular */
+  border-radius: 50%;
+  object-fit: cover; /* Para que la imagen no se deforme */
+  border: 2px solid #fff; /* Opcional: añade un borde blanco */
+}
+
+
+.container-account2 {
+  width: 100%;
+  max-width: 1200px; /* Ajusta según el diseño deseado */
+  margin: 0 auto; /* Para centrar si hay un `max-width` */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Register  */
+
+/* Account  */
+
+.form-container2 {
+  text-align: center;
+}
+
+.button-save {
+  margin-left: 13vw; /* 25% del ancho de la pantalla */
+}
+
+.usuario{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: auto;
+  margin-right: 200px; /* Agrega un espacio entre la imagen y el formulario */
+ 
+}
+
+.form2{
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 15px;
+}
+
+.title{
+  font-size: 25px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  background-color: black;
+  color: white;
+}
+.form-container-plans{
+  margin-right: 20px;
+  width: 350px;
+  height: auto;
+  justify-content: center;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.form-container-plans2 {
+  width: 100%; /* Tamaño fijo para cada contenedor */
+  height: auto;
+  text-align: center;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.form-container-plans3 {
+  width: 75%; /* Tamaño fijo para cada contenedor */
+  height: auto;
+  text-align: center;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.card-body2{
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-left: 125px;
+}
+
+/* Admin  */
+
+.container-admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+
+/* ========================= */
+/* 🎨 Estilos para el Modal de Error */
+/* ========================= */
+
+#errorModal .modal-content {
+  background-color: #ffeded;
+  border: 2px solid #dc3545;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(220, 53, 69, 0.4);
+}
+
+#errorModal .modal-header {
+  background-color: #dc3545;
+  color: white;
+  border-bottom: none;
+}
+
+#errorModal .modal-body {
+  color: #dc3545;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+#errorModal .modal-footer {
+  border-top: none;
+}
+
+.CardError {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto; /* Centra horizontalmente */
+}
+
+
+/*mostrar descripciones, esto sirve para los saltos de linea*/
+.description {
+  white-space: pre-line;
+}
+
+/* ========================= */
+/* Clase Footer para error.html */
+/* ========================= */
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  display: absolute; /* Oculto por defecto */
+}
+
+.editImageInput {
+  position: absolute;
+  font-size: 100px;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+
+.editImageInputContainer {
+  text-align: center;
+}
+
+.editImageButton {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  border-radius: 5px;
+  background: linear-gradient(to bottom, royalblue, dodgerblue);
+  border: none;
+  height: 30px;
+  width: 120px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  line-height: 30px;
+}
+
+.editImageButtonText {
+  position: relative;
+  z-index: 1;
+
+}
+
+/*More diets button*/
+.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  color : #dc3545;
+}

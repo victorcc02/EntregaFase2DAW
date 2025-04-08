@@ -1,0 +1,83 @@
+{{>header}}
+{{>navbar}}
+{{#user}}
+  <div class="form-container2">
+    <h1 class="title">Profile</h1>
+  </div>
+  <div class="container-account2">
+    <form class="form" action='/editAccount' method="post" enctype="multipart/form-data">
+      <input type="hidden" name="id" value="{{user.id}}" />
+      {{#user.imgUser}}
+      <img id="previewImage" src="/account/image" class="card-img-top" alt="User Image">
+      {{/user.imgUser}}
+      <input type="file" name="imageField" placeholder="Foto" accept=".jpg, .jpeg, .png"  onchange="previewSelectedImage(event)">
+      <div class="profile-container">
+          <div class="form-container">
+            <h2 class="title">Nombre:</h2>
+            <input type="name" class="input" value="{{user.name}}" name="name"/>
+            <h2 class="title">Email:</h2>
+            <input type="email" class="input" value="{{user.email}}" name="email"/>
+            <input type="hidden" name="_csrf" value="{{token}}"/>
+          </div> 
+          <div class="button-save">
+              <button class="btn-load" type="submit">Save</button>
+          </div>
+           
+      </div> 
+      </form>  
+  </div>
+  
+  <section>
+      <div class="container-account2">
+        <div class="form-container-plans2">
+          <h1 class="title">Training</h1>
+
+          <ul>
+          {{#trainings}}            
+                <div class="card shadow-sm">
+                  <div class="card-body">
+                {{#imgTraining}}
+                    <div id="training/nutrition-picture-container">
+                      <img src="/training/image/{{id}}" alt="training" class="training" id="trainingImage">
+                    </div>
+                {{/imgTraining}}
+                    <h5 class="card-title">{{name}}</h5>
+                    <button class="btn-load-2 goToDeleteRoutineFromList" data-training-id="{{id}}">Delete</button>
+                    <button class="btn-load-2 goToShowRoutine" data-training-id="{{id}}">Show more details</button>
+                  </div>
+                </div>
+          {{/trainings}}
+          </ul>
+
+          {{^trainings}}
+          <p>There are no training plans added to the profile</p>
+          {{/trainings}}
+        </div>
+
+        <div class="form-container-plans2">
+          <h1 class="title">Nutrition</h1>
+
+          <ul>
+          {{#nutritions}}
+              <div class="card shadow-sm">
+                <div class="card-body">
+                    <div id="training/nutrition-picture-container">
+                      <img src="/nutrition/image/{{id}}" alt="nutrition" class="nutrition-image" id="nutritionImage">
+                    </div>
+                  <h5 class="card-title">{{name}}</h5>
+                  <button class="btn-load-2 goToDeleteDietFromList" data-nutrition-id="{{id}}">Delete</button>
+                  <button class="btn-load-2 goToShowDiet" data-nutrition-id="{{id}}">Show more details</button>
+                </div>
+              </div>
+          {{/nutritions}}
+          </ul>
+          
+          {{^nutritions}}
+          <p>There are no nutrition plans added to the profile</p>
+          {{/nutritions}}
+        </div>
+      </div>
+  </section>
+{{/user}}
+
+{{>footer}}

@@ -1,0 +1,49 @@
+{{>header}}
+{{>navbar}}
+
+
+    <div class="container mt-5">
+      <h2 class="text-center">Create New Training Routine </h2>
+      <form id="routineForm" name="editForm" onsubmit="return validateRoutineForm()" method="post" action="/trainings/createRoutine">
+          <input type="hidden" name="_csrf" value="{{token}}"/>
+        <div class="mb-3">
+          <label for="routineName" class="form-label">Routine Name:</label>
+          <input type="text" class="form-control" id="routineName" name="name"  placeholder="Write the name of new routine" />
+        </div>
+        <div class="mb-3">
+          <label for="intensity" class="form-label">Intensity:</label>
+          <select class="form-select" id="intensity" name="intensity" required>
+            <option value="50%">50%</option>
+            <option value="60%">60%</option>
+            <option value="70%">70%</option>
+            <option value="80%">80%</option>
+            <option value="90%">90%</option>
+            <option value="100%">100%</option>
+          </select>
+        </div>
+        <div class="mb-3">
+            <label for="routineDuration" class="form-label">Routine Duration:</label>
+            <input type="number" class="form-control" id="routineDuration" name="duration"  placeholder="Write the duration of new routine" />
+        </div>
+        <div class="mb-3">
+          <label for="goal" class="form-label">Training Goal:</label>
+          <select class="form-select" id="goal" name="goal" required>
+            <option value="Increase weight">Increase Weight</option>
+            <option value="Increase volume">Increase Volume</option>
+            <option value="Lose weight">Lose Weight</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="exercises" class="form-label">Exercises (list them here):</label>
+          <textarea  name="description" class="form-control"  id="exercises"  rows="4"  placeholder="E.g., Squats, Bench Press, Deadlifts..."></textarea>
+        </div>
+
+        <div class="d-flex justify-content-center gap-3">
+            <button type="submit" class="btn-load">Save Routine</button>
+            <a href="/trainings" class="btn-load">Cancel</a>
+        </div>
+      </form>
+    </div>
+
+
+{{>footer}}

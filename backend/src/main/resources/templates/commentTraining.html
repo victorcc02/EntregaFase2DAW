@@ -1,0 +1,61 @@
+{{>header}} <!-- Header included -->
+{{>navbar}} <!-- Navbar included -->
+
+<!-- Start Comments Section -->
+<section class="container py-5 flex-grow-1" id="ajaxPagination">
+  <h2 class="text-center mb-4">Comments for Training Routine: {{training.name}}</h2>
+  <input type="hidden" id="trainingId" value="{{training.id}}">
+  {{#training.imgTraining}}
+  <div class="mb-3">
+      <img src="/training/image/{{training.id}}" class="card-img-top" id="uTrainingImage"/>
+  </div>
+{{/training.imgTraining}}
+  <div id="resultsContainer" class="row">
+
+    {{#comment}}
+    <div class="col-12 col-md-4 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{name}}</h5>
+          <p class="description">{{description}}</p>                  
+        </div>
+        <div class="btn-div-extra">
+            {{#canEdit}}
+                <a href="{{training.id}}/{{id}}/editcomment" class="btn-load">Edit</a>
+            {{/canEdit}}
+            {{#admin}}
+                <button class="btn-load-2-delete goToDeleteCommentRoutine" data-training-id="{{training.id}}" data-comment-id="{{id}}">Delete</button>
+            {{/admin}}
+           {{#logged}}
+               {{^admin}}
+                   <a href="{{training.id}}/{{id}}/report" class="btn-load-2">Report</a>
+               {{/admin}}
+           {{/logged}}
+
+        </div>
+      </div>
+    </div>
+    {{/comment}}
+        {{^comment}}
+            <p>No hay comentarios todavia para esta rutina</p>
+        {{/comment}}
+  </div>
+
+  <!-- Load more button and add comments button -->
+  <div class="text-center">
+    <button id="loadMore" class="btn-load" onclick="loadMoreComments()">More Comments</button>
+{{#logged}}
+    <button id="addComment" class="btn-load" onclick="window.location.href=window.location.pathname + '/newComment'">
+      Add Comment
+    </button>
+{{/logged}}
+    <button class="btn-load" onclick="redirectFromComments()">
+      Return
+    </button>
+    <!-- This button should change the reference depending on where it comes from-->
+  </div>
+</section>
+<!-- End Comments Section -->
+
+{{>footer}}
+<!-- Footer included -->

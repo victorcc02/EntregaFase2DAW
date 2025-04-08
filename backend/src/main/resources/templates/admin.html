@@ -1,0 +1,73 @@
+{{>header}} 
+{{>navbar}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div class="container d-flex flex-column align-items-center mt-4">
+  
+  <div class="w-100 d-flex justify-content-center">
+    <div class="form-container-plans3">
+      <p class="title text-center">Admin Profile</p>
+      <div class="form">
+        <input type="text" class="input" value="{{admin.name}}" readonly />
+        <input type="email" class="input" value="{{admin.email}}" readonly />
+      </div>
+    </div>
+  </div>
+
+  <!-- Nueva fila separada -->
+  <div class="w-100 d-flex justify-content-center mt-4">
+    <div class="container-chart">
+      <h5 class="text-center">Reported vs. Non-Reported Comments</h5>
+      <canvas id="reportGraphicChart"
+          data-reported="{{reportedCount}}"
+          data-not-reported="{{notReportedCount}}">
+      </canvas>
+    </div>
+  </div>
+
+  <!-- Nueva sección que estará en otra "fila" -->
+  <section class="w-100 mt-4">
+    <div class="container-account2 d-flex flex-wrap justify-content-center">
+      <div class="form-container-plans2">
+        <h1 class="title">Reported Training Comments</h1>
+        <ul>
+        {{#trainingComments}}            
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">{{name}}</h5>
+            <p class="description">{{description}}</p>
+            <a href="trainingComments/{{id}}/unreport" class="btn-load-3">Validate</a>
+            <a href="trainingComments/{{id}}/editcommentAdmin" class="btn-load">Edit</a> 
+            <a href="trainingComments/{{id}}/deleteAdmin" class="btn-load-2">Delete</a> 
+          </div>
+        </div>
+        {{/trainingComments}}
+        </ul>
+        {{^trainingComments}}
+        <p>There are no training comments reported.</p>
+        {{/trainingComments}}
+      </div>
+
+      <div class="form-container-plans2">
+        <h1 class="title">Reported Nutrition Comments</h1>
+        <ul>
+        {{#nutritionComments}}
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">{{name}}</h5>
+                <p class="description">{{description}}</p>
+                <a href="nutritionComments/{{id}}/unreport" class="btn-load-3">Validate</a>
+                <a href="nutritionComments/{{id}}/editcommentAdmin" class="btn-load">Edit</a> 
+                <a href="nutritionComments/{{id}}/deleteAdmin" class="btn-load-2">Delete</a> 
+              </div>
+            </div>
+        {{/nutritionComments}}
+        </ul>
+        {{^nutritionComments}}
+        <p>There are no nutrition comments reported.</p>
+        {{/nutritionComments}}
+      </div>
+    </div>
+  </section>
+</div>
+
+{{>footer}}

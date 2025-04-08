@@ -1,0 +1,48 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:8.0.33
+    container_name: gymdb
+    restart: on-failure
+    environment:
+      - MYSQL_DATABASE=gymdb  # Name of the database to be created
+      - MYSQL_ROOT_PASSWORD=pass  # Root password for MySQL
+    ports:
+      - "3306"  # Map port 3306 on the host to port 3306 in the container
+    volumes:
+      - db_data:/var/lib/mysql  # Persist database data in a Docker volume
+    networks:
+      - gymdb-network  # Connect to the custom network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+
+  web:
+    image: vcandel/gymdb:latest
+    container_name: gymdb-app
+    ports:
+      - "443:8443"  # Map port 443 on the host to port 8443 in the container
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/gymdb # Database connection URL
+      - SPRING_DATASOURCE_USERNAME=root  # Database username
+      - SPRING_DATASOURCE_PASSWORD=pass  # Database password
+      - JWT_SECRET=miClaveSecretaSeguraParaJWT1234567890abcdef  # Secret key for JWT
+    restart: on-failure  # Restart the container on failure
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    
+    networks:
+      - gymdb-network  # Connect to the custom network
+
+volumes:
+  db_data:  # Define the volume for database data
+
+networks:
+  gymdb-network:  # Define the custom network

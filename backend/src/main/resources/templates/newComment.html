@@ -1,0 +1,44 @@
+{{>header}} <!-- Header included -->
+{{>navbar}} <!-- Navbar included -->
+
+<!-- Start Comment Form -->
+<div class="container mt-5 flex-grow-1">
+  <h2 class="text-center">Create a new comment</h2>
+  <form id="commentForm" method="post" onsubmit="redirectFromNewComments(event,0)">
+    <input type="hidden" name="_csrf" value="{{token}}"/>
+    <div class="mb-3">
+      <!--Comment title -->
+      <label for="commentTitle" class="form-label">Comment title:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="commentTitle"
+        name="commentTitle" 
+        required
+      /><!-- The title of the routine/diet should go here. -->
+    </div>
+    <div class="mb-3">
+      <label for="commentText" class="form-label">Comment:</label>
+      <textarea
+        class="form-control"
+        id="commentText"
+        rows="4"
+        placeholder="Write here your comment..."
+        name="commentText"
+        required
+      ></textarea><!--Here goes the comment-->
+    </div>
+    <div class="d-flex justify-content-center gap-3">
+      <button type="submit" class="btn-load">Submit Comment</button>
+      <button
+        class="btn-load"
+        onclick="redirectFromNewComments(event,1)">Return
+      </button>
+      <!-- This button should change the reference depending on where it comes from-->
+    </div>
+  </form>
+</div>
+<!-- End Comment Form -->
+
+{{>footer}}
+<!-- Footer included -->

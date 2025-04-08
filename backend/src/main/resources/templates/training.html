@@ -1,0 +1,36 @@
+{{>header}}
+{{>navbar}}
+
+    <!-- Training Plans Section -->
+    <section class="container py-5" id="ajaxCards">
+      <h2 class="text-center mb-4">Training Plans</h2>
+      <div id="resultsContainer" class="row">
+
+          {{#trainings}}
+              <div class="col-12 col-md-4 mb-4">
+                  <div class="card shadow-sm">
+                      {{#imgTraining}}
+                      <img src="/training/image/{{id}}" class="card-img-top" alt="{{name}}" />
+                      {{/imgTraining}}
+                      <div class="card-body">
+                          <h5 class="card-title">{{name}}</h5>
+                          <p class="description">{{description}}</p>
+                      </div>
+
+                      <button class="btn btn-service goToShowRoutine" data-training-id="{{id}}">Go to {{name}}!</button>
+                  </div>
+              </div>
+          {{/trainings}}
+
+      </div>
+
+      <div class="d-flex justify-content-center gap-3">
+        <button id="loadMore" class="btn-load" onclick="loadMoreCards()">More Routines</button><!--ADD JS FUNCTION NAME FOR AJAX-->
+          {{#logged}}
+            <a id="newRoutine" class="btn-load"  href="/trainings/createRoutine">New Routine</a>
+          {{/logged}}
+      </div>
+    </section>
+    <!-- End Training Plans Section -->
+
+{{>footer}}

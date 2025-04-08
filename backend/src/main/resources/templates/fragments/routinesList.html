@@ -1,0 +1,15 @@
+{{#trainings}}
+<div class="col-12 col-md-4 mb-4">
+    <div class="card shadow-sm">
+        {{#imgTraining}}
+        <img src="/training/image/{{id}}" class="card-img-top" alt="{{name}}" />
+        {{/imgTraining}}
+        <div class="card-body">
+            <h5 class="card-title">{{name}}</h5>
+            <p class="description">{{description}}</p>
+        </div>
+
+        <button class="btn btn-service goToShowRoutine" data-training-id="{{id}}">Go to {{name}}!</button>
+    </div>
+</div>
+{{/trainings}}

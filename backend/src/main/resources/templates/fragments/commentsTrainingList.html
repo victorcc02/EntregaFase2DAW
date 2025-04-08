@@ -1,0 +1,24 @@
+{{#comment}}
+<div class="col-12 col-md-4 mb-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">{{name}}</h5>
+      <p class="description">{{description}}</p>
+    </div>
+    <div class="btn-div-extra">
+        {{#canEdit}}
+            <a href="{{training.id}}/{{id}}/editcomment" class="btn-load">Edit</a>
+        {{/canEdit}}
+          {{#admin}}
+            <a href="{{training.id}}/{{id}}/delete" class="btn-load-2-delete">Delete</a>
+          {{/admin}}
+        {{#logged}}
+            {{^admin}}
+              <a href="{{training.id}}/{{id}}/report" class="btn-load-2">Report</a>
+            {{/admin}}
+        {{/logged}}
+
+    </div>
+  </div>
+</div>
+{{/comment}}

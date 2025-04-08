@@ -1,0 +1,53 @@
+<header>
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+      <div class="container">
+          <a class="navbar-brand" href="/index">AlphaGym</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/nutritions">Nutrition</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/trainings">Training</a>
+                    </li>
+                    {{#admin}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/search">Search</a>
+                    </li>
+                    {{/admin}}
+                    {{^user}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    {{/user}}
+                    {{#user}}{{^admin}}	
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account">Account</a>
+                    </li>
+                    {{/admin}}
+                    <li class="nav-item">
+                        <form action="/logout" method="post">
+                            <input type="hidden" name="_csrf" value="{{token}}" />
+                            <button type="submit" class="nav-link">Log out</button>
+                        </form>
+                    </li>
+                    {{/user}}
+                    {{^user}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                  {{/user}}
+              </ul>
+          </div>
+      </div>
+  </nav>
+</header>
+
+
+

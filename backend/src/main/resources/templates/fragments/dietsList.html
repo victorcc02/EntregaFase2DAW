@@ -1,0 +1,15 @@
+{{#nutritions}}
+<div class="col-12 col-md-4 mb-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      {{#imgNutrition}}
+        <img src="/nutrition/image/{{id}}" alt="{{name}}" class="nutrition" id="nutritionImage">
+      {{/imgNutrition}}
+      <h5 class="card-title">{{name}}</h5>
+      <p>Meals:</p>
+      <p>{{description}}</p>
+      <a href="/nutritions/{{id}}" class="btn btn-service">Look for {{name}} details!</a>
+    </div>
+  </div>
+</div>
+{{/nutritions}}

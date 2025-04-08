@@ -1,0 +1,65 @@
+{{>header}}
+{{>navbar}}
+
+
+    <div class="container mt-5">
+      <h2 class="text-center">Diet Details of diet {{nutrition.id}}</h2>
+    {{#nutrition.imgNutrition}}
+        <div class="mb-3">
+            <img src="/nutrition/image/{{nutrition.id}}" class="card-img-top" id="uNutritionImage" />
+        </div>
+    {{/nutrition.imgNutrition}}
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Diet Name:</label>
+        <p class="form-control">{{nutrition.name}}</p>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Diet Number of Calories:</label>
+        <p class="form-control">{{nutrition.calories}}</p>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Diet Goal:</label>
+        <p class="form-control">{{nutrition.goal}}</p>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Meals of the Day:</label>
+        <textarea class="form-control" rows="4" readonly>{{nutrition.description}}</textarea>
+      </div>
+
+{{#logged}}
+      <div class="mb-3">
+          <a class="btn-load w-100" href="/nutritionComments/{{nutrition.id}}/newComment"> Add Comment </a>
+      </div>
+{{/logged}}      
+
+      <div class="d-flex justify-content-center gap-3">
+        {{#logged}}
+          {{^admin}}
+            {{#subscribed}}
+                  <button class="btn-load goToUnsubscribeDiet" data-nutrition-id="{{nutrition.id}}">Unsubscribe</button>
+            {{/subscribed}}
+            {{^subscribed}}
+                  <button class="btn-load goToSubscribeDiet" data-nutrition-id="{{nutrition.id}}">Subscribe</button>
+            {{/subscribed}}
+          {{/admin}}
+        {{/logged}} 
+        <a class="btn-load" href="/nutritionComments/{{nutrition.id}}">View Comments</a>
+        {{#canEdit}}
+             <button class="btn-load goToEditDiet" data-nutrition-id="{{nutrition.id}}" >Edit</button>
+          {{/canEdit}}
+            {{#admin}}
+             <button class="btn-load-delete goToDeleteDiet" data-nutrition-id="{{nutrition.id}}">Delete</button>
+           {{/admin}}
+        <a href="/nutritions" class="btn-load">Return</a>
+        {{#logged}}
+        <a class="btn-load" href="/nutritions/{{nutrition.id}}/pdf">Download PDF</a>
+        {{/logged}}
+      </div>
+    </div>
+
+
+{{>footer}}

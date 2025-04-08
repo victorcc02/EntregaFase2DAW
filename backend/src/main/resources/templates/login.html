@@ -1,0 +1,19 @@
+{{> header}}
+{{> navbar}}
+
+<div class="container-account">
+  <img src="/images/gym5.jpg" class="fondo-login" alt="gym-login" />
+  <div class="form-container">
+    <p class="title">Welcome Back</p>
+    <form class="form" action="/login" method="post">
+      <input type="email" class="input" placeholder="Email" name="username" required />
+      <input type="password" class="input" placeholder="Password" name="password" required />
+      <input type="hidden" name="_csrf" value="{{token}}"/>
+      <input type="submit" class="btn-load" value="Login" />
+      <p>Don't have an account? <a href="/register">Sign up</a></p>
+  </form>
+  
+  </div>
+</div>
+
+{{> footer}}

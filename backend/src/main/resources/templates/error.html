@@ -1,0 +1,71 @@
+{{>header}}
+{{>navbar}}
+
+<div class="d-flex flex-column min-vh-100">
+  <!--start ERROR-->
+  <div
+    class="modal fade"
+    id="errorModal"
+    tabindex="-1"
+    aria-labelledby="errorModalLabel"
+    aria-hidden="true"
+    >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="errorModalLabel">Page Error</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          An error occurred while trying to access the URL.
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end ERROR-->
+
+  <main class="flex-grow-1"> 
+    <!-- Card Error -->
+    <div
+      id="errorContent"
+      class="text-center mt-5"
+      style="display: none; justify-content: center"
+    >
+      <div id="loadingSpinner">
+        <div class="spinner-border text-danger" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <div class="CardError">
+        <div
+          id="errorCard"
+          class="card mt-3"
+          style="width: 18rem; display: none"
+        >
+          <img src="/images/error.png" class="card-img-top" alt="Error" />
+          <div class="card-body">
+            <p class="card-text text-danger fw-bold">
+              Oops! Something went wrong. Try again.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  {{>footer}}
+</div>
