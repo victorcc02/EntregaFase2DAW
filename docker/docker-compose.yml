@@ -27,7 +27,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/gymdb # Database connection URL
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/gymdb # Database connection URL
       - SPRING_DATASOURCE_USERNAME=root  # Database username
       - SPRING_DATASOURCE_PASSWORD=pass  # Database password
       - JWT_SECRET=miClaveSecretaSeguraParaJWT1234567890abcdef  # Secret key for JWT
